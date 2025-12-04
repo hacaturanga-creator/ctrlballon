@@ -1,4 +1,4 @@
-/ Твой Firebase Config
+// Твой Firebase Config
 const firebaseConfig = {
   apiKey: "AIzaSyC8trqk1mHsKTTrts_kFuZSgnb5m5Lp-sw",
   authDomain: "ctrlballon.firebaseapp.com",
@@ -14,13 +14,18 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
-// Кнопка создаёт тестовый баллон
-document.getElementById("testWrite").onclick = () => {
-  const newBallonRef = db.ref("ballons").push();
-  newBallonRef.set({
-    status: "full",
-    location: "warehouse",
-    created: Date.now()
-  });
-  alert("Тестовый баллон создан!");
-};
+// Привязка кнопки
+const btn = document.getElementById("testWrite");
+if (btn) {
+  btn.onclick = () => {
+    const newBallonRef = db.ref("ballons").push();
+    newBallonRef.set({
+      status: "full",
+      location: "warehouse",
+      created: Date.now()
+    });
+    alert("Тестовый баллон создан!");
+  };
+} else {
+  console.error("Кнопка testWrite не найдена!");
+}
